@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const Leaderboard = () => {
@@ -21,16 +22,35 @@ const Leaderboard = () => {
       });
   }, [endpoint]);
 
-  if (loading) return <div>Loading leaderboard...</div>;
+  if (loading) return <div className="text-center my-4">Loading leaderboard...</div>;
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaders.map((leader, idx) => (
-          <li key={leader.id || idx}>{leader.name || JSON.stringify(leader)}</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-primary">Leaderboard</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered align-middle">
+            <thead className="table-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Score</th>
+                {/* Add more columns as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {leaders.map((leader, idx) => (
+                <tr key={leader.id || idx}>
+                  <td>{leader.id || idx + 1}</td>
+                  <td>{leader.name || '-'}</td>
+                  <td>{leader.score || '-'}</td>
+                  {/* Add more cells as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

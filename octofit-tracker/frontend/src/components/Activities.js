@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const Activities = () => {
@@ -21,16 +22,37 @@ const Activities = () => {
       });
   }, [endpoint]);
 
-  if (loading) return <div>Loading activities...</div>;
+  if (loading) return <div className="text-center my-4">Loading activities...</div>;
 
   return (
-    <div>
-      <h2>Activities</h2>
-      <ul>
-        {activities.map((activity, idx) => (
-          <li key={activity.id || idx}>{activity.name || JSON.stringify(activity)}</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-primary">Activities</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered align-middle">
+            <thead className="table-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                {/* Add more columns as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {activities.map((activity, idx) => (
+                <tr key={activity.id || idx}>
+                  <td>{activity.id || idx + 1}</td>
+                  <td>{activity.name || '-'}</td>
+                  <td>{activity.description || '-'}</td>
+                  <td>{activity.type || '-'}</td>
+                  {/* Add more cells as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const Users = () => {
@@ -21,16 +22,35 @@ const Users = () => {
       });
   }, [endpoint]);
 
-  if (loading) return <div>Loading users...</div>;
+  if (loading) return <div className="text-center my-4">Loading users...</div>;
 
   return (
-    <div>
-      <h2>Users</h2>
-      <ul>
-        {users.map((user, idx) => (
-          <li key={user.id || idx}>{user.name || JSON.stringify(user)}</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-primary">Users</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered align-middle">
+            <thead className="table-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                {/* Add more columns as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, idx) => (
+                <tr key={user.id || idx}>
+                  <td>{user.id || idx + 1}</td>
+                  <td>{user.name || '-'}</td>
+                  <td>{user.email || '-'}</td>
+                  {/* Add more cells as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 const Workouts = () => {
@@ -21,16 +22,37 @@ const Workouts = () => {
       });
   }, [endpoint]);
 
-  if (loading) return <div>Loading workouts...</div>;
+  if (loading) return <div className="text-center my-4">Loading workouts...</div>;
 
   return (
-    <div>
-      <h2>Workouts</h2>
-      <ul>
-        {workouts.map((workout, idx) => (
-          <li key={workout.id || idx}>{workout.name || JSON.stringify(workout)}</li>
-        ))}
-      </ul>
+    <div className="card shadow-sm mb-4">
+      <div className="card-body">
+        <h2 className="card-title mb-4 text-primary">Workouts</h2>
+        <div className="table-responsive">
+          <table className="table table-striped table-bordered align-middle">
+            <thead className="table-light">
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                {/* Add more columns as needed */}
+              </tr>
+            </thead>
+            <tbody>
+              {workouts.map((workout, idx) => (
+                <tr key={workout.id || idx}>
+                  <td>{workout.id || idx + 1}</td>
+                  <td>{workout.name || '-'}</td>
+                  <td>{workout.description || '-'}</td>
+                  <td>{workout.type || '-'}</td>
+                  {/* Add more cells as needed */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
